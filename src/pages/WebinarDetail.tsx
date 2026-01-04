@@ -41,13 +41,14 @@ export default function WebinarDetail() {
 
   const register = async () => {
     try {
-    const res =   await api.post(`/webinars/${webinarId}/register`, {
+      await api.post(`/webinars/${webinarId}/register`, {
         fullName: name,
         email,
       });
-      setWebinar((prev) =>
-  prev ? { ...prev, attendeeCount: res.data.attendeeCount } : prev
-);
+      
+//       setWebinar((prev) =>
+//   prev ? { ...prev, attendeeCount: res.data.attendeeCount } : prev
+// );
 
       toast.success("🎉 Successfully registered for the webinar!");
       setName("");
@@ -86,6 +87,7 @@ if (!webinarId) {
   }
 
   if (!webinar) return null;
+  console.log(attendees)
 
   return (
     <main className="flex-1 bg-slate-950 py-16">

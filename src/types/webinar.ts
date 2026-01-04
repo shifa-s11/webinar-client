@@ -11,4 +11,5 @@ export interface Attendee {
   fullName: string;
   email: string;
   createdAt: string;
+  attendees:[],
 }
