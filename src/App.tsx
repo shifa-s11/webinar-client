@@ -15,7 +15,6 @@ function App() {
         <Route path="/webinars" element={<WebinarList />} />
         <Route path="/webinars/:id" element={<WebinarDetail />} />
       </Routes>
-
       <Footer />
        <Toaster
         position="top-right"

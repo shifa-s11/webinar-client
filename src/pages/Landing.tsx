@@ -8,7 +8,7 @@ function Landing({ onEnter }: Props) {
       {/* HERO */}
       <section className="hero">
         <div className="hero-content">
-          <span className="badge">LIVE • INTERACTIVE • FREE</span>
+          <span className="badge">LIVE • INTERACTIVE • FREE </span>
 
           <h1>
             Attend <span>Live Webinars</span><br />
