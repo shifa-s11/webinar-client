@@ -3,10 +3,12 @@ import api from "../services/api";
 import type { Webinar } from "../types/webinar";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
+import CreateWebinarModal from "../components/CreateWebinarModel";
 
 export default function WebinarList() {
   const [webinars, setWebinars] = useState<Webinar[]>([]);
   const [loading, setLoading] = useState(true);
+const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     api.get("/webinars")
@@ -22,15 +24,25 @@ export default function WebinarList() {
       <div className="mx-auto max-w-7xl px-6">
 
         {/* PAGE INTRO */}
-        <div className="mb-14 max-w-2xl">
-          <h2 className="text-3xl font-bold text-white">
-            Upcoming Webinars
-          </h2>
-          <p className="mt-3 text-slate-400">
-            Attend live, expert-led webinars designed to help you stay ahead in
-            technology, development, and modern engineering practices.
-          </p>
-        </div>
+       <div className="mb-14 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  <div className="max-w-2xl">
+    <h2 className="text-3xl font-bold text-white">
+      Upcoming Webinars
+    </h2>
+    <p className="mt-3 text-slate-400">
+      Attend live, expert-led webinars designed to help you stay ahead in
+      technology, development, and modern engineering practices.
+    </p>
+  </div>
+
+  <button
+    onClick={() => setShowModal(true)}
+    className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+  >
+    + Create Webinar
+  </button>
+</div>
+
 
 
         {/* WEBINAR CARDS */}
@@ -71,6 +83,16 @@ export default function WebinarList() {
           </div>
         )}
       </div>
+      {showModal && (
+  <CreateWebinarModal
+    onClose={() => setShowModal(false)}
+    onCreated={async () => {
+      const res = await api.get("/webinars");
+      setWebinars(res.data.data);
+    }}
+  />
+)}
+
     </main>
   );
 }

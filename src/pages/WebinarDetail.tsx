@@ -41,10 +41,13 @@ export default function WebinarDetail() {
 
   const register = async () => {
     try {
-      await api.post(`/webinars/${webinarId}/register`, {
+    const res =   await api.post(`/webinars/${webinarId}/register`, {
         fullName: name,
         email,
       });
+      setWebinar((prev) =>
+  prev ? { ...prev, attendeeCount: res.data.attendeeCount } : prev
+);
 
       toast.success("🎉 Successfully registered for the webinar!");
       setName("");
